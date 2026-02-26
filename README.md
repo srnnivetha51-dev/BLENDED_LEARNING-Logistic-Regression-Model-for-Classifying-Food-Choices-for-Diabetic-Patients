@@ -9,22 +9,83 @@ To implement a logistic regression model to classify food items for diabetic pat
 2. Anaconda – Python 3.7 Installation / Jupyter notebook
 
 ## Algorithm
-1. 
-2. 
-3. 
-4. 
+1. Start the program.
+2. Import necessary libraries (pandas, sklearn, seaborn, matplotlib).
+3. Load the dataset from the CSV file.
+4. Display dataset overview and structure using head() and info().
+5. Separate input features (X) and target variable (y).
+6. Scale feature values using MinMaxScaler.
+7. Encode target labels using LabelEncoder.
+8. Split the dataset into training and testing sets with stratification.
+9. Train the Logistic Regression model and generate predictions.
+10. Evaluate performance using accuracy, confusion matrix, and classification report.
+Program:
+
 
 ## Program:
 ```
 /*
 Program to implement Logistic Regression for classifying food choices based on nutritional information.
-Developed by: 
-RegisterNumber:  
+
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.preprocessing import LabelEncoder,MinMaxScaler
+from sklearn.metrics import accuracy_score,precision_score,recall_score,f1_score,confusion_matrix,classification_report
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+df=pd.read_csv("food_items (1).csv")
+
+print('Name: S R NIVEDHITHA')
+print('Reg. No: 212225240102')
+print("Dataset Overview:")
+print(df.head())
+print("\nDataset Info:")
+print(df.info())
+
+X_raw = df.iloc[:, :-1]
+y_raw = df.iloc[:, -1:]
+
+scaler = MinMaxScaler()
+X = scaler.fit_transform(X_raw)
+
+label_encoder = LabelEncoder()
+y = label_encoder.fit_transform(y_raw.values.ravel())
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, stratify=y, random_state = 123)
+
+penalty= 'l2'
+multi_class = 'multinomial'
+solver = 'lbfgs'
+max_iter = 1000
+
+l2_model = LogisticRegression(random_state=123, penalty=penalty, multi_class=multi_class, solver=solver, max_iter=max_iter)
+l2_model.fit(X_train, y_train)
+y_pred = l2_model.predict(X_test)
+
+print('Name: S R NIVEDHITHA')
+print('Reg. No: 212225240102')
+print("\nModel Evaluation:")
+print("Accuracy:", accuracy_score(y_test, y_pred))
+print("\nClassification Report:")
+print(classification_report(y_test, y_pred))
+
+conf_matrix = confusion_matrix(y_test, y_pred)
+print(conf_matrix)
+print('Name: S R NIVEDHITHA')
+print('Reg. No: 212225240102')
+
+Developed by: S R NIVEDHITHA
+RegisterNumber:  212225240102
 */
 ```
 
 ## Output:
 ![simple linear regression model for predicting the marks scored](sam.png)
+![alt text](<Screenshot 2026-02-26 184951.png>)
+![alt text](<Screenshot 2026-02-26 185002.png>)
+![alt text](<Screenshot 2026-02-26 185011.png>)
 
 
 ## Result:
